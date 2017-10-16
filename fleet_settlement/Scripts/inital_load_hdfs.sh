@@ -8,7 +8,7 @@ load_function () {
 	if [[ $check_date > 0 ]]; then
 		month=$(date -d "${firstday}" "+%Y%m")
 		sqoop import -Dorg.apache.sqoop.splitter.allow_text_splitter=true \
-		--connect "jdbc:sap://172.23.2.76:30015/?currentschema=_SYS_BIC" \
+		--connect "jdbc:sap://172.21.2.76:30015/?currentschema=_SYS_BIC" \
 		--driver com.sap.db.jdbc.Driver \
 		--username HADOOP_PROD \
 		--password "Ir0cksap" \
