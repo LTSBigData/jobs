@@ -8,12 +8,12 @@ load_function () {
 	if [[ $check_date > 0 ]]; then
 		month=$(date -d "${firstday}" "+%Y%m")
 		sqoop import -Dorg.apache.sqoop.splitter.allow_text_splitter=true \
-		--connect "jdbc:sap://172.23.10.71:30015/?currentschema=_SYS_BIC" \
+		--connect "jdbc:sap://172.23.2.76:30015/?currentschema=_SYS_BIC" \
 		--driver com.sap.db.jdbc.Driver \
 		--username HADOOP_PROD \
 		--password "Ir0cksap" \
 		--query 'select * from "_SYS_BIC"."LOVES.FLEET.VIEWS.BW.MULTIPROVIDER/CV_FLEET_SETTLEMENT_MP_TABLEAU" WHERE "0CALDAY" > '${firstday}' AND "0CALDAY" < '${lastday}' AND $CONDITIONS' \
-		--target-dir "/dev/landing/SAPBWD_CV_FLEET_SETTLEMENT_MP_TABLEAU/month_part=${month}" \
+		--target-dir "/dev/landing/SAPBWP/CV_FLEET_SETTLEMENT_MP_TABLEAU/month_part=${month}" \
 		--delete-target-dir \
 		--fields-terminated-by '\001' --lines-terminated-by '\n' \
 		-m 1
@@ -23,7 +23,7 @@ load_function () {
 }
 
 input_start=2016-07-01
-input_end=2017-09-30
+input_end=2017-10-15
 
 startdate=$(date -I -d "$input_start") || exit -1
 enddate=$(date -I -d "$input_end")     || exit -1
